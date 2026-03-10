@@ -10,6 +10,9 @@ DATABASE_URL = os.getenv(
     "postgresql+asyncpg://nba_user:password@localhost:5432/nba_predictor"
 )
 
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+
 engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
