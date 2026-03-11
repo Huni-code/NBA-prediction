@@ -85,8 +85,8 @@ export default function App() {
           <div style={styles.logo}>
             <span style={styles.logoBall}>🏀</span>
             <div>
-              <div style={styles.logoTitle}>NBA PREDICTOR</div>
-              <div style={styles.logoSub}>Prod. Huniboy ㅅㅅㅅ기모띠·ELO · Advanced Stats · Injury · Odds</div>
+              <div style={styles.logoTitle}>NBA PREDICTOR (Prod. Huniboy ㅅㅅㅅ기모띠)</div>
+              <div style={styles.logoSub}>ELO · Advanced Stats · Injury · Odds</div>
             </div>
           </div>
           <div style={{
