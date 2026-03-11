@@ -1,7 +1,7 @@
 import logging
 import httpx
 from datetime import date
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from database import AsyncSessionLocal
 from models import Team, TeamStats, EloRating
@@ -163,7 +163,8 @@ async def run_full_pipeline():
     logger.info("ETL 시작...")
     async with AsyncSessionLocal() as db:
         today = date.today()
-
+        await db.execute(text("TRUNCATE teams CASCADE"))
+        await db.commit()
         team_id_map = {}
         for i, (name, meta) in enumerate(TEAM_META.items(), start=1):
             row = {"name": name, "city": name.rsplit(" ", 1)[0], **meta}
