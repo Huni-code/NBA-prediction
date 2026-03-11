@@ -166,7 +166,7 @@ async def run_full_pipeline():
 
         team_id_map = {}
         for i, (name, meta) in enumerate(TEAM_META.items(), start=1):
-            row = {"id": i, "name": name, "city": name.rsplit(" ", 1)[0], **meta}
+            row = {"name": name, "city": name.rsplit(" ", 1)[0], **meta}
             stmt = pg_insert(Team).values(**row).on_conflict_do_update(
             index_elements=["abbreviation"], 
             set_={
@@ -213,12 +213,8 @@ async def run_full_pipeline():
                 last5_wins=last5_wins,
                 streak=streak,
             ).on_conflict_do_update(
-                constraint="uq_team_snapshot",
-                set_={
-                    "wins": wins, "losses": losses,
-                    "last5_wins": last5_wins, "streak": streak,
-                    "net_rating": round(fallback["off_rating"] - fallback["def_rating"], 2),
-                }
+                index_elements=["abbreviation"],
+                set_={"name": name}
             )
             await db.execute(stmt)
 
