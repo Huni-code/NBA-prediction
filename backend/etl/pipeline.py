@@ -168,7 +168,7 @@ async def run_full_pipeline():
         for i, (name, meta) in enumerate(TEAM_META.items(), start=1):
             row = {"id": i, "name": name, "city": name.rsplit(" ", 1)[0], **meta}
             stmt = pg_insert(Team).values(**row).on_conflict_do_update(
-                index_elements=["id"], set_={"name": name}
+            index_elements=["abbreviation"], set_={"name": name, "id": i}
             )
             await db.execute(stmt)
             team_id_map[meta["abbreviation"]] = i
