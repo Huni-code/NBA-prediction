@@ -460,7 +460,7 @@ const styles = {
     minHeight: "100vh",
     background: "#0a0a0f",
     color: "#fff",
-    fontFamily: "'Barlow Condensed', 'Impact', system-ui, sans-serif",
+    fontFamily: "'Barlow Condensed', 'Noto Sans KR', system-ui, sans-serif",
     position: "relative",
     overflowX: "hidden",
   },
